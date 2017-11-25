@@ -1,3 +1,25 @@
+<?php
+$dashboard_path = '';
+if(isset($_SESSION["logged_in_user"])) {
+  switch ($_SESSION["logged_in_user"]['role']) {
+    case "Manager":
+      $dashboard_path = 'manager.php';
+      break;
+    case "Seeker":
+      $dashboard_path = 'seeker.php';
+      break;
+    case "HR":
+      $dashboard_path = 'human_resources.php';
+      break;
+    case "Regular":
+      $dashboard_path = 'regular.php';
+      break;
+    default:
+      $dashboard_path = '';
+  }
+} 
+?>
+
 <!-- START NAVBAR -->
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -20,8 +42,8 @@
 
       <ul class="nav navbar-nav navbar-right">
         <?php if(isset($_SESSION["logged_in_user"])): ?>
-          <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/dashboard.php" ? "active" : "");?>">
-            <a href="dashboard.php">Dashboard</a>
+          <li>
+            <a href="<?php echo $dashboard_path ?>">Dashboard</a>
           </li>
 
           <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/settings.php" ? "active" : "");?>">
