@@ -46,8 +46,6 @@
 
     <?php include_once 'templates/navbar.tpl.php';?>
     
-    <a href="index.php?search_user=Adolf_Hitler" class="btn btn-danger">SEARCH</a>
-
     <ul>
         <?php if(isset($search_user)): ?>
             <?php foreach ($users as $user): ?>
