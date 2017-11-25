@@ -20,6 +20,10 @@
       <ul class="nav navbar-nav navbar-right">
         <?php if(isset($_SESSION["logged_in_user"])): ?>
           <li>
+            <a href="dashboard.php">Dashboard</a>
+          </li>
+
+          <li>
             <a href="settings.php"><?php echo $_SESSION["logged_in_user"] . "'s" . " profile" ?></a>
           </li>
 

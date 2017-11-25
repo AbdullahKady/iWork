@@ -34,8 +34,8 @@
       if ($out === 'Password incorrect' || $out === 'Not registered') {
         print_r($out);
       } else {
-        // TODO: Check on role !
-        $_SESSION['logged_in_user'] = $username;
+        $_SESSION['logged_in_user']['username'] = $username;
+        $_SESSION['logged_in_user']['role'] = $out;
 
         header("Location: index.php");
         die();

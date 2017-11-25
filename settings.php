@@ -19,7 +19,7 @@
 	  <div class="centered">
 	    <h2>
 	    	<strong>
-	    		<?php echo $_SESSION['logged_in_user']; ?>'s profile
+	    		<?php echo $_SESSION['logged_in_user']['username']; ?>'s profile
 	    	</strong>
 	    </h2>
 	  </div>

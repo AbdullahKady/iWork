@@ -52,7 +52,8 @@
 
       if ($procedure_params['output'] === 'Registeration successful') {
         // Execution completed, login the user
-        $_SESSION['logged_in_user'] = $username;
+        $_SESSION['logged_in_user']['username'] = $username;
+        $_SESSION['logged_in_user']['role'] = 'Seeker';
 
         header("Location: index.php");
         die();
