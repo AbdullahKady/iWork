@@ -1,5 +1,6 @@
 <form action="settings.php" method="post" class="container">
-	<h3>Search Companies</h3>
+
+			<h3>Search Companies</h3>
 
   <div class="row">
   	<div class="col-md-6">
@@ -31,7 +32,18 @@
 	  </label>
 	</div>
 
+	<div class="row">
+		<div class="col-md-9">
+  	<button type="submit" class="btn btn-info btn-wide">Search</button>
+  	 	</div>
+		<div class="col-md-3">
+			 <a href="highest_salary.php" class="btn btn-success">View highest paying companies!</a>
+		 	 
+		</div>
+	</div>
 
-  <button type="submit" class="btn btn-info btn-wide">Search</button>
+
 
 </form>
+
+  
