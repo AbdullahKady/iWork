@@ -4,27 +4,10 @@
     include_once 'includes/db_connect.php';
 
     // parse all query strings and create variables with them
-    // Example: index.php?username=adolf
-    // will create a variable username with value adolf
+    // Example: index.php?username=banana
+    // will create a variable username with value banana
     parse_str($_SERVER['QUERY_STRING']);
 
-    $sql = "SELECT username FROM Users ";
-    $stmt = sqlsrv_query( $conn, $sql );
-
-    $users = array();
-    
-    if( $stmt === false) {
-        echo "stmt false";
-    }
-    else {
-
-        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-              array_push($users, $row['username']);
-        }
-
-    }
-
-    sqlsrv_free_stmt($stmt);
 
 ?>
 
@@ -37,20 +20,15 @@
 
 <body>
 
-    <?php include_once 'templates/navbar.tpl.php';?>
-    
-    <ul>
-        <?php if(isset($search_user)): ?>
-            <?php foreach ($users as $user): ?>
-                <li><?php echo $user?></li>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </ul>
+  <?php include_once 'templates/navbar.tpl.php';?>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  <div class="container">
+    <?php include_once 'templates/company_search.tpl.php';?>
+    <hr>
+    <?php include_once 'templates/company_list_type.tpl.php';?>
+  </div>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <?php include_once 'includes/scripts.php';?>
 
 </body>
 </html>

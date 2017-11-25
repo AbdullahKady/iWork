@@ -17,6 +17,71 @@
     $user_data = $row;
 	}
 
+	// Edit part !
+  // TODO: THIS IS COPIED FROM register.php
+
+	// if(isset($_POST["username"])) {
+ //    // Fetch data from the form
+ //    $username = $_POST["username"];
+ //    $password = $_POST["password"];
+ //    $email = $_POST["email"];
+ //    $birth_date = $_POST["birth_date"];
+ //    $years_of_experience = $_POST["years_of_experience"];
+ //    $first_name = $_POST["first_name"];
+ //    $middle_name = $_POST["middle_name"];
+ //    $last_name = $_POST["last_name"];
+
+ //    // specify params - MUST be a variable that can be passed by reference!
+ //    $procedure_params['name'] = $username;
+ //    $procedure_params['pass'] = $password;
+ //    $procedure_params['p_email'] = $email;
+ //    $procedure_params['bd'] = $birth_date;
+ //    $procedure_params['exp'] = $years_of_experience;
+ //    $procedure_params['f_name'] = $first_name;
+ //    $procedure_params['m_name'] = $middle_name;
+ //    $procedure_params['l_name'] = $last_name;
+ //    $procedure_params['output'] = "";
+
+ //    // Set up the procedure params array - be sure to pass the param by reference
+ //    $procedure_passed_params = array(
+ //      array(&$procedure_params['name'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['pass'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['p_email'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['bd'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['exp'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['f_name'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['m_name'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['l_name'], SQLSRV_PARAM_IN),
+ //      array(&$procedure_params['output'], SQLSRV_PARAM_OUT)
+ //    );
+
+ //    // EXEC the procedure
+ //    $sql = "EXEC Register1 @name = ?, @pass = ?, @p_email = ?, @bd = ?, @exp = ?, @f_name = ?, @m_name = ?, @l_name = ?, @output = ?";
+ //    $prepared_stmt = sqlsrv_prepare($conn, $sql, $procedure_passed_params);
+
+ //    if(!$prepared_stmt) {
+ //      die( print_r( sqlsrv_errors(), true));
+ //    }
+
+ //    if(sqlsrv_execute($prepared_stmt)) {
+ //      while($res = sqlsrv_next_result($prepared_stmt)) {/* pass */};
+
+ //      print_r($procedure_params['output']);
+
+ //      if ($procedure_params['output'] === 'Registeration successful') {
+ //        // Execution completed, login the user
+ //        $_SESSION['logged_in_user']['username'] = $username;
+ //        $_SESSION['logged_in_user']['role'] = 'Seeker';
+
+ //        header("Location: index.php");
+ //        die();
+ //      }
+ //    } else {
+ //      die( print_r( sqlsrv_errors(), true));
+ //    }
+
+ //  }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +104,7 @@
 	    </h2>
 	  </div>
 
-	  <form action="settings.php" method="post" id="update-profile-form">
+	  <form action="settings.php" method="post">
 
 	    <div class="form-group">
 	      <label for="first_name">First Name</label>
@@ -87,6 +152,8 @@
 	  </form>
 
 	</div>
+
+	<?php include_once 'includes/scripts.php';?>
 
 </body>
 </html>
