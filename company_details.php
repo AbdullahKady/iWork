@@ -77,6 +77,7 @@
         <tr>
           <th>Code</th>
           <th>Name</th>
+          <th>Available Jobs</th>
         </tr>
       </thead>
 
@@ -85,6 +86,9 @@
           <tr>
             <td><?php echo $department['code'] ?></td>
             <td><?php echo $department['name'] ?></td>
+            <td>
+              <a href="<?php echo 'department_details.php?company_mail=' . $company['email'] . '&department_code=' . $department['code']?>">View jobs</a>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
