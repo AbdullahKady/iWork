@@ -17,8 +17,6 @@
     $user_data = $row;
 	}
 
-	print_r($user_data)
-
 ?>
 
 <!DOCTYPE html>
@@ -63,10 +61,19 @@
 	      <input type="email" class="form-control" name="email" value="<?php echo $user_data['personal_email'] ?>">
 	    </div>
 
-	    <!-- TODO: Populate others -->
 	    <div class="form-group">
 	      <label for="birth_date">Birth Date</label>
 	      <input type="text" class="form-control" name="birth_date" value="<?php echo $user_data['birth_date']->format('m/d/Y') ?>">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="years_of_experience">Years of Experience</label>
+	      <input type="number" class="form-control" name="years_of_experience" value="<?php echo $user_data['years_of_experience'] ?>">
+	    </div>
+
+			<div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" class="form-control" disabled value="<?php echo $user_data['age'] ?>">
 	    </div>
 
 	    <div class="form-group">
