@@ -1,3 +1,46 @@
+<?php
+    session_start();
+    
+    $serverName = "DESKTOP-N1RE9II\SQLEXPRESS";
+
+    $connectionOptions = array(
+        "Database" => "iWork"
+    );
+
+    // Establishes the connection
+    $conn = sqlsrv_connect($serverName, $connectionOptions);
+
+    // Sanity check
+    if(!$conn) {
+        echo "CONNECTION FAILED TO THE DATABASE";
+    }
+    
+    // parse all query strings and create variables with them
+    // Example: index.php?username=adolf
+    // will create a variable username with value adolf
+    parse_str($_SERVER['QUERY_STRING']);
+
+    $sql = "SELECT username FROM Users ";
+    $stmt = sqlsrv_query( $conn, $sql );
+
+    $users = array();
+    
+    if( $stmt === false) {
+        echo "stmt false";
+    }
+    else {
+
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+              array_push($users, $row['username']);
+        }
+
+    }
+
+    sqlsrv_free_stmt($stmt);
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,48 +56,6 @@
 
 <body>
 
-    <?php
-
-        $serverName = "DESKTOP-N1RE9II\SQLEXPRESS";
-
-        $connectionOptions = array(
-            "Database" => "iWork"
-        );
-
-        // Establishes the connection
-        $conn = sqlsrv_connect($serverName, $connectionOptions);
-
-        // Sanity check
-        if(!$conn) {
-            echo "CONNECTION FAILED TO THE DATABASE";
-        }
-        
-        // parse all query strings and create variables with them
-        // Example: index.php?username=adolf
-        // will create a variable username with value adolf
-        parse_str($_SERVER['QUERY_STRING']);
-
-        $sql = "SELECT username FROM Users ";
-        $stmt = sqlsrv_query( $conn, $sql );
-
-        $users = array();
-        
-        if( $stmt === false) {
-            echo "stmt false";
-        }
-        else {
-
-            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-                  array_push($users, $row['username']);
-            }
-
-        }
-
-        sqlsrv_free_stmt($stmt);
-
-    ?>
-
-    <!-- MARKUP -->
 
     <!-- START NAVBAR -->
     
@@ -69,7 +70,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">iWork</a>
+          <a class="navbar-brand" href="index.php">iWork</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">

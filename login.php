@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +16,6 @@
 </head>
 
 <body>
-
-   <?php
-
-
-
-   ?>
-
-
 
     <!-- MARKUP -->
 
@@ -36,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">iWork</a>
+          <a class="navbar-brand" href="index.php">iWork</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
