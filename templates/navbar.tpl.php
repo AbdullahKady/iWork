@@ -13,9 +13,9 @@
 
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php">Home</a></li>
-        <li><a href="companies.php">Companies</a></li>
-        <li><a href="jobs.php">Jobs</a></li>
+        <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/index.php" ? "active" : "");?>" ><a href="index.php">Home</a></li>
+        <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/companies.php" ? "active" : "");?>" ><a href="companies.php">Companies</a></li>
+        <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/jobs.php" ? "active" : "");?>" ><a href="jobs.php">Jobs</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

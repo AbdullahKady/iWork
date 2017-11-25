@@ -6,16 +6,24 @@
   parse_str($_SERVER['QUERY_STRING']);
 
   $company = array();
-  // EXEC the procedure
-  $sql = "SELECT * FROM Companies WHERE email = " . "'". $company_mail . "'";
-  $stmt = sqlsrv_query($conn, $sql);
+  $departments = array();
 
-  if(!$stmt) {
+  $sql_company = "SELECT * FROM Companies WHERE email = " . "'". $company_mail . "'";
+  $sql_departments = "EXEC Departements_in_company '" . $company_mail . "'";
+
+  $stmt_company = sqlsrv_query($conn, $sql_company);
+  $stmt_departments = sqlsrv_query($conn, $sql_departments);
+
+  if(!$stmt_company || !$stmt_departments) {
     die( print_r( sqlsrv_errors(), true));
   }
 
-  while($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+  while($row = sqlsrv_fetch_array($stmt_company, SQLSRV_FETCH_ASSOC)) {
     $company = $row;
+  }
+
+  while($row = sqlsrv_fetch_array($stmt_departments, SQLSRV_FETCH_ASSOC)) {
+    array_push($departments, $row);
   }
 
 ?>
@@ -34,7 +42,7 @@
   <div class="container">
     <h2 class="text-center"><?php echo $company['name'] ?></h2>
 
-
+    <!-- Company Details -->
     <table class="table table-hover">
       <thead>
         <tr>
@@ -58,7 +66,30 @@
         </tr>
       </tbody>
     </table>
-    
+
+    <hr>
+
+    <h2 class="text-center">Departments</h2>
+
+    <!-- Department Details -->
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <?php foreach ($departments as $department): ?>
+          <tr>
+            <td><?php echo $department['code'] ?></td>
+            <td><?php echo $department['name'] ?></td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+
   </div>
 
   <?php include_once 'includes/scripts.php';?>
