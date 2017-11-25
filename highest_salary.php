@@ -48,7 +48,7 @@
         <tr>
           <td><?php echo $var['name'] ?></td>
           <td><?php echo $var['email'] ?></td>
-          <td><?php echo $var['avg'] ?></td>
+          <td><?php echo round($var['avg'], 2) ?> EGP</td>
         </tr>
       <?php endforeach; ?>
       </tbody>
