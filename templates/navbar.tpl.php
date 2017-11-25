@@ -20,22 +20,22 @@
 
       <ul class="nav navbar-nav navbar-right">
         <?php if(isset($_SESSION["logged_in_user"])): ?>
-          <li>
+          <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/dashboard.php" ? "active" : "");?>">
             <a href="dashboard.php">Dashboard</a>
           </li>
 
-          <li>
-            <a href="settings.php"><?php echo $_SESSION["logged_in_user"]['username'] . "'s" . " profile" ?></a>
+          <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/settings.php" ? "active" : "");?>">
+            <a href="settings.php" ><?php echo $_SESSION["logged_in_user"]['username'] . "'s" . " profile" ?></a>
           </li>
 
           <li>
             <a href="logout.php">Logout</a>
           </li>  
         <?php else: ?>
-          <li>
+          <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/login.php" ? "active" : "");?>">
               <a href="login.php">Login</a>
           </li>
-          <li>
+          <li class="<?php echo ($_SERVER['PHP_SELF'] == "/iwork-project/register.php" ? "active" : "");?>">
               <a href="register.php">Register</a>
           </li>
         <?php endif; ?>
