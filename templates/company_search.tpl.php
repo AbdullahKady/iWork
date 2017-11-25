@@ -32,7 +32,6 @@
 	</div>
 
 
-  <button type="submit" class="btn btn-primary">Save</button>
-  <a href="index.php" class="btn">Cancel</a>
+  <button type="submit" class="btn btn-info btn-wide">Search</button>
 
 </form>
