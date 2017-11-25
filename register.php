@@ -3,6 +3,7 @@
   include_once 'includes/db_connect.php';
 ?>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +19,29 @@
 
 <body>
 
-  <?php include_once 'templates/navbar.tpl.php';?>  
+	<?php include_once 'templates/navbar.tpl.php';?>
 
   <form action="" class="input-group container">
     <div class="container">
-      <label><b>Username</b></label>
+      <label><strong>Username</strong></label>
       <input class="input-control" type="text" placeholder="Enter Username" name="username" required>
 
-      <label><b>Password</b></label>
+      <label><strong>Password</strong></label>
       <input class="input-control" type="password" placeholder="Enter Password" name="password" required>
 
-      <button class="btn btn-primary" type="submit">Login</button>
+      <label><strong>Email</strong></label>
+      <input class="input-control" type="text" placeholder="Enter Username" name="username" required>
+
+      <label><strong>Username</strong></label>
+      <input class="input-control" type="text" placeholder="Enter Username" name="username" required>
+      
+      <label><strong>Username</strong></label>
+      <input class="input-control" type="text" placeholder="Enter Username" name="username" required>
+
+
+
+
+      <button class="btn btn-primary" type="submit">Register</button>
       <a href="index.php" class="btn">Cancel</a>
     </div>
 

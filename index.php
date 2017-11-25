@@ -1,20 +1,8 @@
 <?php
     session_start();
-    
-    $serverName = "DESKTOP-N1RE9II\SQLEXPRESS";
 
-    $connectionOptions = array(
-        "Database" => "iWork"
-    );
+    include_once 'includes/db_connect.php';
 
-    // Establishes the connection
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-
-    // Sanity check
-    if(!$conn) {
-        echo "CONNECTION FAILED TO THE DATABASE";
-    }
-    
     // parse all query strings and create variables with them
     // Example: index.php?username=adolf
     // will create a variable username with value adolf
@@ -56,45 +44,8 @@
 
 <body>
 
-
-    <!-- START NAVBAR -->
+    <?php include_once 'templates/navbar.tpl.php';?>
     
-
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.php">iWork</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="#">something</a></li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="login.php">Login</a>
-            </li>
-            <li>
-                <a href="signup.php">Signup</a>
-            </li>
-
-          </ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <!-- END NAVBAR -->
-
     <a href="index.php?search_user=Adolf_Hitler" class="btn btn-danger">SEARCH</a>
 
     <ul>
