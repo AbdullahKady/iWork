@@ -45,10 +45,14 @@
       die( print_r( sqlsrv_errors(), true));
     }
 
-    
-
     if(sqlsrv_execute($prepared_stmt)) {
+      while($res = sqlsrv_next_result($prepared_stmt)) {/* pass */};
+
       print_r($procedure_params['output']);
+
+      // if ($procedure_params['output'] !== 'Registeration failed, the username is used. Please choose another username and try again') {
+      //   $_SESSION['logged_in_user'] = $username;
+      // }
     } else {
       die( print_r( sqlsrv_errors(), true));
     }
