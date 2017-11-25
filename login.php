@@ -13,46 +13,13 @@
 
 <body>
 
-    <?php
+   <?php
 
-        $serverName = "DESKTOP-N1RE9II\SQLEXPRESS";
 
-        $connectionOptions = array(
-            "Database" => "iWork"
-        );
 
-        // Establishes the connection
-        $conn = sqlsrv_connect($serverName, $connectionOptions);
+   ?>
 
-        // Sanity check
-        if(!$conn) {
-            echo "CONNECTION FAILED TO THE DATABASE";
-        }
-        
-        // parse all query strings and create variables with them
-        // Example: index.php?username=adolf
-        // will create a variable username with value adolf
-        parse_str($_SERVER['QUERY_STRING']);
 
-        $sql = "SELECT username FROM Users ";
-        $stmt = sqlsrv_query( $conn, $sql );
-
-        $users = array();
-        
-        if( $stmt === false) {
-            echo "stmt false";
-        }
-        else {
-
-            while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-                  array_push($users, $row['username']);
-            }
-
-        }
-
-        sqlsrv_free_stmt($stmt);
-
-    ?>
 
     <!-- MARKUP -->
 
@@ -94,20 +61,20 @@
 
     <!-- END NAVBAR -->
 
-    <a href="index.php?search_user=Adolf_Hitler" class="btn btn-danger">SEARCH</a>
+  <form action="" class="input-group container">
+    <div class="container">
+      <label><b>Username</b></label>
+      <input class="input-control" type="text" placeholder="Enter Username" name="username" required>
 
-    <ul>
-        <?php if(isset($search_user)): ?>
-            <?php foreach ($users as $user): ?>
-                <li><?php echo $user?></li>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </ul>
+      <label><b>Password</b></label>
+      <input class="input-control" type="password" placeholder="Enter Password" name="password" required>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+      <button class="btn btn-primary" type="submit">Login</button>
+      <a href="index.php" class="btn">Cancel</a>
+    </div>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  </form>
 
 </body>
 </html>
