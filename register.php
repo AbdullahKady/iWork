@@ -50,9 +50,13 @@
 
       print_r($procedure_params['output']);
 
-      // if ($procedure_params['output'] !== 'Registeration failed, the username is used. Please choose another username and try again') {
-      //   $_SESSION['logged_in_user'] = $username;
-      // }
+      if ($procedure_params['output'] === 'Registeration successful') {
+        // Execution completed, login the user
+        $_SESSION['logged_in_user'] = $username;
+
+        header("Location: index.php");
+        die();
+      }
     } else {
       die( print_r( sqlsrv_errors(), true));
     }
