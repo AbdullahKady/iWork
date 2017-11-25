@@ -2,6 +2,23 @@
   session_start();
   include_once 'includes/db_connect.php';
 
+	$username = $_SESSION['logged_in_user']['username'];
+	$user_data = array();
+  // EXEC the procedure
+  $sql = "SELECT * FROM Users WHERE username = " . "'". $username . "'";
+
+  $stmt = sqlsrv_query($conn, $sql);
+
+  if(!$stmt) {
+    die( print_r( sqlsrv_errors(), true));
+  }
+
+  while($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+    $user_data = $row;
+	}
+
+	print_r($user_data)
+
 ?>
 
 <!DOCTYPE html>
@@ -28,32 +45,33 @@
 
 	    <div class="form-group">
 	      <label for="first_name">First Name</label>
-	      <input type="text" class="form-control" name="first_name" value="<?php echo $_SESSION['logged_in_user']; ?>">
+	      <input type="text" class="form-control" name="first_name" value="<?php echo $user_data['first_name'] ?>">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="middle_name">Middle Name</label>
+	      <input type="text" class="form-control" name="middle_name" value="<?php echo $user_data['middle_name'] ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="last_name">Last Name</label>
-	      <input type="text" class="form-control" name="last_name" value="<?php echo $_SESSION['logged_in_user']; ?>">
+	      <input type="text" class="form-control" name="last_name" value="<?php echo $user_data['last_name'] ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="email">Email</label>
-	      <input type="email" class="form-control" name="email" value="<?php echo $_SESSION['logged_in_user']; ?>">
+	      <input type="email" class="form-control" name="email" value="<?php echo $user_data['personal_email'] ?>">
 	    </div>
 
+	    <!-- TODO: Populate others -->
 	    <div class="form-group">
-	      <label for="old_password">Old Password</label>
-	      <input type="password" class="form-control" name="old_password" placeholder="•••••••">
+	      <label for="birth_date">Birth Date</label>
+	      <input type="text" class="form-control" name="birth_date" value="<?php echo $user_data['birth_date']->format('m/d/Y') ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="new_password">New Password</label>
 	      <input type="password" class="form-control" name="new_password" placeholder="•••••••">
-	    </div>
-
-	    <div class="form-group">
-	      <label for="confirm_password">New Password</label>
-	      <input type="password" class="form-control" name="confirm_password" placeholder="•••••••">
 	    </div>
 
 	    <button type="submit" class="btn btn-primary">Save</button>

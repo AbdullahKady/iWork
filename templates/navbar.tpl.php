@@ -24,7 +24,7 @@
           </li>
 
           <li>
-            <a href="settings.php"><?php echo $_SESSION["logged_in_user"] . "'s" . " profile" ?></a>
+            <a href="settings.php"><?php echo $_SESSION["logged_in_user"]['username'] . "'s" . " profile" ?></a>
           </li>
 
           <li>
