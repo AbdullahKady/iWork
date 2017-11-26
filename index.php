@@ -13,6 +13,9 @@
       else if($status == "registered"){
         $flash_message='<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Successfully registered! Welcome to iWork '. $_SESSION["logged_in_user"]['username'] . '</div>';
       }
+      else if($status == "logout"){
+         $flash_message='<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Successfully logged-out! come back soon :) </div>';
+      }  
       else{
         $flash_message = null;
       }

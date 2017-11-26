@@ -106,32 +106,32 @@
 
 	    <div class="form-group">
 	      <label for="first_name">First Name</label>
-	      <input type="text" class="form-control" name="first_name" value="<?php echo $user_data['first_name'] ?>">
+	      <input type="text" class="form-control" maxlength="20" name="first_name" value="<?php echo $user_data['first_name'] ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="middle_name">Middle Name</label>
-	      <input type="text" class="form-control" name="middle_name" value="<?php echo $user_data['middle_name'] ?>">
+	      <input type="text" class="form-control" maxlength="20" name="middle_name" value="<?php echo $user_data['middle_name'] ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="last_name">Last Name</label>
-	      <input type="text" class="form-control" name="last_name" value="<?php echo $user_data['last_name'] ?>">
+	      <input type="text" class="form-control" maxlength="20" name="last_name" value="<?php echo $user_data['last_name'] ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="email">Email</label>
-	      <input type="email" class="form-control" name="email" value="<?php echo $user_data['personal_email'] ?>">
+	      <input type="email" class="form-control" maxlength="50" name="email" value="<?php echo $user_data['personal_email'] ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="birth_date">Birth Date</label>
-	      <input type="text" class="form-control" name="birth_date" value="<?php echo $user_data['birth_date']->format('m/d/Y') ?>">
+	      <input type="date" class="form-control" min="1900-12-12" max="2017-11-11" name="birth_date" value="<?php echo $user_data['birth_date']->format('m/d/Y') ?>">
 	    </div>
 
 	    <div class="form-group">
 	      <label for="years_of_experience">Years of Experience</label>
-	      <input type="number" class="form-control" name="years_of_experience" value="<?php echo $user_data['years_of_experience'] ?>">
+	      <input type="number" class="form-control" min="0" max="60" name="years_of_experience" value="<?php echo $user_data['years_of_experience'] ?>">
 	    </div>
 
 			<div class="form-group">
@@ -140,8 +140,8 @@
 	    </div>
 
 	    <div class="form-group">
-	      <label for="new_password">New Password</label>
-	      <input type="password" class="form-control" name="new_password" placeholder="•••••••" required>
+	      <label for="new_password">New Password (re-enter the old password if you don't want to change it)</label>
+	      <input type="password" class="form-control" maxlength="20" name="new_password" placeholder="•••••••" required>
 	    </div>
 
 	    <button type="submit" class="btn btn-primary">Save</button>

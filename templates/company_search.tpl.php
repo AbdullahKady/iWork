@@ -6,14 +6,14 @@
   	<div class="col-md-6">
   		<div class="form-group">
 		    <label for="company_name">Company name</label>
-		    <input type="text" placeholder="Simens" class="form-control" name="company_name">
+		    <input type="text" placeholder="Simens" class="form-control" maxlength="20" name="company_name">
 		  </div>	
   	</div>
 
   	<div class="col-md-6">
   		<div class="form-group">
 		    <label for="company_address">Company address</label>
-		    <input type="text" placeholder="Planet Earth" class="form-control" name="company_address">
+		    <input type="text" placeholder="Planet Earth" class="form-control" maxlength="100" name="company_address">
 		  </div>
   	</div>
   </div>

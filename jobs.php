@@ -40,7 +40,7 @@
     <form class="form-group" action="jobs.php" method="POST">
       <div class="row">
         <div class="col-md-10">
-          <input class="form-control" type="text" placeholder="Software Engineer" name="job_keyword">
+          <input class="form-control" type="text" placeholder="Software Engineer" maxlength="120" name="job_keyword">
         </div>
         <div class="col-md-2">
           <button class="btn btn-info" type="submit">Search</button>

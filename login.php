@@ -74,10 +74,10 @@
   <form action="login.php" method="POST" class="form-group container">
     <div class="container">
       <label><b>Username</b></label>
-      <input class="form-control" type="text" placeholder="Enter Username" name="username" required>
+      <input class="form-control" type="text" placeholder="Enter Username" name="username" required maxlength="20">
 
       <label><b>Password</b></label>
-      <input class="form-control" type="password" placeholder="Enter Password" name="password" required>
+      <input class="form-control" type="password" placeholder="Enter Password" name="password" required maxlength="20">
 
       <button class="btn btn-primary" type="submit">Login</button>
       <a href="index.php" class="btn">Cancel</a>

@@ -91,30 +91,30 @@
   <form action="register.php" method="POST" class="form-group container">
     <div>
       <label><strong>Username</strong></label>
-      <input class="form-control" type="text" placeholder="Enter Username" name="username" required>
+      <input class="form-control" type="text" placeholder="Enter Username" name="username" required maxlength="20">
 
       <label><strong>Password</strong></label>
-      <input class="form-control" type="password" placeholder="Enter Password" name="password" required>
+      <input class="form-control" type="password" placeholder="Enter Password" name="password" required maxlength="20">
 
       <label><strong>Personal Email</strong></label>
-      <input class="form-control" type="text" placeholder="john@doe.com" name="email" required>
+      <input class="form-control" type="text" placeholder="john@doe.com" name="email" required maxlength="50">
 
       <label><strong>Birth date</strong></label>
-      <input class="form-control" type="text" placeholder="MM/DD/YYYY" name="birth_date" required>
+      <input class="form-control" type="date" placeholder="MM/DD/YYYY" name="birth_date" min="1900-12-12" max="2017-11-11"  required>
       
       <label><strong>Years of Experience</strong></label>
-      <input class="form-control" type="number" name="years_of_experience" min="0" max="99" required>
+      <input class="form-control" type="number" name="years_of_experience" min="0" max="60" required>
 
       <hr>
 
       <label><strong>First Name</strong></label>
-      <input class="form-control" type="text" placeholder="john" name="first_name">
+      <input class="form-control" type="text" placeholder="john" name="first_name" maxlength="20">
 
       <label><strong>Middle Name</strong></label>
-      <input class="form-control" type="text" placeholder="doe" name="middle_name">
+      <input class="form-control" type="text" placeholder="doe" name="middle_name" maxlength="20">
 
       <label><strong>Last Name</strong></label>
-      <input class="form-control" type="text" placeholder="smith" name="last_name">
+      <input class="form-control" type="text" placeholder="smith" name="last_name" maxlength="20">
 
     </div>
 
