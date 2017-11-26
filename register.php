@@ -47,16 +47,17 @@
 
     if(sqlsrv_execute($prepared_stmt)) {
       while($res = sqlsrv_next_result($prepared_stmt)) {/* pass */};
-
-      print_r($procedure_params['output']);
-
+      
+      
       if ($procedure_params['output'] === 'Registeration successful') {
         // Execution completed, login the user
         $_SESSION['logged_in_user']['username'] = $username;
         $_SESSION['logged_in_user']['role'] = 'Seeker';
 
-        header("Location: index.php");
+        header("Location: index.php?status=registered");
         die();
+      } else {
+        $flash_message='<div class="alert alert-danger alert-dismissable"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Registeration failed, the username is used. Please choose another username and try again </div>';
       }
     } else {
       die( print_r( sqlsrv_errors(), true));
@@ -76,6 +77,16 @@
 <body>
 
 	<?php include_once 'templates/navbar.tpl.php';?>
+
+    <?php if(isset($flash_message)): ?>
+    <div class="container">
+      <div class = "row">
+        <div class="col-sm-12">
+         <?php echo $flash_message; ?>
+        </div>
+      </div>
+    </div>
+  <?php endif; ?>
 
   <form action="register.php" method="POST" class="form-group container">
     <div>

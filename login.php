@@ -28,23 +28,25 @@
     }
 
     if(sqlsrv_execute($prepared_stmt)) {
-      while($res = sqlsrv_next_result($prepared_stmt)) {/* pass */};
-
-      $out = $procedure_params['output'];
-      if ($out === 'Password incorrect' || $out === 'Not registered') {
-        print_r($out);
+      while($flash_message = sqlsrv_next_result($prepared_stmt)) {/* pass */};
+      
+      $output = $procedure_params['output'];
+      if ($output === 'Password incorrect') {
+        $flash_message='<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Login failed. Password entered is incorrect. </div>';
+      }else if($output === 'Not registered'){
+        $flash_message='<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Login failed. Username is not registered. Feel free to register  <a href="register.php">here</a> </div>'; 
       } else {
         $_SESSION['logged_in_user']['username'] = $username;
-        $_SESSION['logged_in_user']['role'] = $out;
-
-        header("Location: index.php");
+        $_SESSION['logged_in_user']['role'] = $output;
+        header("Location: index.php?status=login");
         die();
       }
     } else {
       die( print_r( sqlsrv_errors(), true));
     }
-
   }
+
+  
 
 ?>
 
@@ -57,6 +59,17 @@
 <body>
 
   <?php include_once 'templates/navbar.tpl.php';?>  
+
+  <?php if(isset($flash_message)): ?>
+    <div class="container">
+      <div class = "row">
+        <div class="col-sm-12">
+         <?php echo $flash_message; ?>
+        </div>
+      </div>
+    </div>
+  <?php endif; ?>
+
 
   <form action="login.php" method="POST" class="form-group container">
     <div class="container">

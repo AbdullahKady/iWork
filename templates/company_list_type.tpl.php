@@ -24,11 +24,11 @@
 
 ?>
 
-<h3>Our Companies</h3>
+<h3 class = "text-center">Our Companies</h3>
 
 <div class="row">
 	<div class="col-md-6">
-		<h5 class="text-center">National</h5>
+		<h5 class="text-center">National :</h5>
 		<ul>
 			<?php foreach ($national_companies as $company): ?>
 				<li>
@@ -40,7 +40,7 @@
 	</div>
 	
 	<div class="col-md-6">
-		<h5 class="text-center">International</h5>
+		<h5 class="text-center">International :</h5>
 		<ul>
 			<?php foreach ($international_companies as $company): ?>
 				<li>

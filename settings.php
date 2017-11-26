@@ -17,7 +17,7 @@
     $user_data = $row;
 	}
 
-	// TODO: Add flash message
+	
 	if(isset($_POST["first_name"])) {
 		
  		// Fetch data from the form
@@ -62,9 +62,8 @@
     }
 
     if(sqlsrv_execute($prepared_stmt)) {
-
-        echo "Success";
-      
+    
+			$flash_message ='<div class="alert alert-success alert-dismissable "><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Your information has been updated.</div>';      
     } else {
       die( print_r( sqlsrv_errors(), true));
     }
@@ -82,6 +81,16 @@
 <body>
 
   <?php include_once 'templates/navbar.tpl.php';?>  
+
+    <?php if(isset($flash_message)): ?>
+    	<div class="container">
+    	  <div class = "row">
+    	    <div class="col-sm-12">
+    	     <?php echo $flash_message; ?>
+    	    </div>
+    	  </div>
+    	</div>
+ 	  <?php endif; ?>
 
 	<div class="container" id="profile">
 

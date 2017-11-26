@@ -1,4 +1,4 @@
-<form action="settings.php" method="post" class="container">
+<form action="companies.php" method="post" class="container">
 
 			<h3>Search Companies</h3>
 
@@ -17,10 +17,12 @@
 		  </div>
   	</div>
   </div>
+  
+  <h6><strong>Company type :</strong></h4>
 
   <div class="radio">
 	  <label>
-	    <input type="radio" name="company_type" value="national" checked>
+	    <input type="radio" name="company_type" value="national" >
 	    National
 	  </label>
 	</div>
@@ -29,6 +31,13 @@
 	  <label>
 	    <input type="radio" name="company_type" value="international">
 	    International
+	  </label>
+	</div>
+
+	<div class="radio">
+	  <label>
+	    <input type="radio" name="company_type" value="both" checked>
+	    Both
 	  </label>
 	</div>
 
