@@ -138,7 +138,7 @@
 			</table>
 
 		<?php else : ?>
-			<div class="alert alert-info alert-dismissable">Looks like there are no <strong>pending applications</strong> for this job.</div>
+			<div class="alert alert-info">Looks like there are no <strong>pending applications</strong> for this job.</div>
 		<?php endif; ?>
 
 	</div>

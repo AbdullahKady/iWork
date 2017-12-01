@@ -126,7 +126,7 @@
 
 	    <div class="form-group">
 	      <label for="birth_date">Birth Date</label>
-	      <input type="date" class="form-control" min="1900-12-12" max="2017-11-11" name="birth_date" value="<?php echo $user_data['birth_date']->format('m/d/Y') ?>">
+	      <input type="date" class="form-control" min="1900-12-12" max="2017-12-12" name="birth_date" value="<?php echo $user_data['birth_date']->format('Y-m-d') ?>">
 	    </div>
 
 	    <div class="form-group">

@@ -81,7 +81,7 @@
 
 	    <div class="form-group">
 	      <label for="deadline">Deadline</label>
-	      <input type="date" class="form-control" min="1950-12-12" max="2017-11-11" name="deadline" value="<?php echo $user_data['deadline']->format('m/d/Y') ?>">
+	      <input type="date" class="form-control" min="1950-12-12" max="2017-11-11" name="deadline" value="<?php echo $user_data['deadline']->format('Y-m-d') ?>">
 	    </div>
 
 	    <button type="submit" class="btn btn-primary">Save</button>
@@ -90,6 +90,7 @@
 	  </form>
 
 	</div>
+	<br>
 
 	<?php include_once 'includes/scripts.php';?>
 

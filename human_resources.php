@@ -5,15 +5,12 @@
     include_once 'includes/db_connect.php';
 
     parse_str($_SERVER['QUERY_STRING']);
-		$username = $_SESSION['logged_in_user']['username'];
+	$username = $_SESSION['logged_in_user']['username'];
 
     if(isset($status)){
     	// Handling the case where I'm redirected from a job edit form.
-    	if($status == "job_edited"){
-
-
+    	if($status === "job_edited") {
     		if(isset($_POST["title"])) {
-
 			 		// Fetch data from the form
     			$title = $_POST["title"];
     			$short_description = $_POST["short_description"];
@@ -69,14 +66,13 @@
 
 
     		$flash_message='<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Job has been edited successfully</div>';
-    	}elseif($status == "announcment_posted"){
+    		
+    	}else if($status == "announcment_posted"){
 
     		if(isset($_POST["announcment_title"])) {
-
     			$announcment_title = $_POST["announcment_title"];
     			$announcment_type = $_POST["announcment_type"];
     			$announcment_description = $_POST["announcment_description"];
-
 
     			$procedure_params['$announcment_title'] = $announcment_title;
     			$procedure_params['username'] = $username;
@@ -102,12 +98,9 @@
     			} else {
     				die( print_r( sqlsrv_errors(), true));
     			}
-
     		}
 
     	}
-
-
     }
 
 
@@ -122,12 +115,42 @@
     	array_push($jobs, $row);
     }
     
-    ?>
+?>
 
     <!DOCTYPE html>
     <html>
     <head>
     	<?php include_once 'includes/header.php' ?>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+        <style>
+            .card {
+                color: #3498db;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                border: 1px solid #cacaca;
+                border-radius: 5px;
+                transition: background-color 500ms ease;
+            }
+
+            .card:hover {
+                background-color: #0f0f0f0f;
+                transition: background-color 500ms ease;
+            }
+
+            .card i {
+                padding-top: 20px;
+            }
+
+            .center {
+                margin: 0 auto;
+            }
+
+            body {
+                margin-bottom: 20px;
+            }
+        </style>
     </head>
 
     <body>
@@ -144,60 +167,92 @@
     	<?php endif; ?>
 
     	<!-- ALL JOBS VIEW -->
- 			<div class="container">
-    			<h3 class="text-center"> All Jobs </h3> 
-    			<?php if(isset($jobs)): ?>
-    				<table class="table table-hover">
-    					<thead>
+    	<div class="container">
+    		<h3 class="text-center"> All Jobs </h3>
+    		<?php if(isset($jobs)): ?>
+    			<table class="table table-hover">
+    				<thead>
+    					<tr>
+    						<th>Title</th>
+    						<th>Short Description</th>
+    						<th>Number Of Vacancies</th>
+    						<th>Job details & Active applications</th>
+    						<th>Edit Job's Info</th>
+    					</tr>
+    				</thead>
+
+    				<tbody>
+    					<?php foreach ($jobs as $job): ?>
     						<tr>
-    							<th>Title</th>
-    							<th>Short Description</th>
-    							<th>Number Of Vacancies</th>
-    							<th>Job details & Active applications</th>
-    							<th>Edit Job's Info</th>
+    							<td><?php echo $job['title'] ?></td>
+    							<td><?php echo $job['short_description'] ?></td>
+    							<td><?php echo $job['no_of_vacancies'] ?></td>
+    							<td><a class="btn btn-primary" href="<?php echo "hr_applications.php?job=". $job['title'] ?>"> View details</a></td>
+    							<td><a class ="btn btn-default" href="<?php echo "hr_edit_jobs.php?job=". $job['title'] ?>"> Edit</a></td>
     						</tr>
-    					</thead>
-
-    					<tbody>
-    						<?php foreach ($jobs as $job): ?>
-    							<tr>
-    								<td><?php echo $job['title'] ?></td>
-    								<td><?php echo $job['short_description'] ?></td>
-    								<td><?php echo $job['no_of_vacancies'] ?></td>
-    								<td><a class="btn btn-primary" href="<?php echo "hr_applications.php?job=". $job['title'] ?>"> View details</a></td>
-    								<td><a class ="btn btn-default" href="<?php echo "hr_edit_jobs.php?job=". $job['title'] ?>"> Edit</a></td>
-    							</tr>
-    						<?php endforeach; ?>
-    					</tbody>
-    				</table>
-    			<?php endif; ?>
-    		</div>
-
-    		<hr>
-    		<!-- ANNOUNCMENTS POSTING -->
-    		<h3 class="text-center">Post Announcments</h3>
-    		<form action="human_resources.php?status=announcment_posted" method="POST" class="form-group container">
-					<div class="row">
-    				<div class="col-md-6">
-    					<label><b>Announcment Title</b></label>
-    					<input class="form-control" type="text" placeholder="Free Coffee!" name="announcment_title" required maxlength="20">
-    				</div>
-    				<div class="col-md-6">
-    					<label><b>Announcment Type</b></label>
-    					<input class="form-control" type="text" placeholder="Freebies" name="announcment_type" required maxlength="10">
-    				</div>
-    			</div>
-
-    				<label><b>Announcment Description </b></label>
-    				<textarea class="form-control" type="text" placeholder="Come grab your free coffee on Sunday at the lounge ..." name="announcment_description" required maxlength="120"></textarea>
-    				<br>
-   					<button class="btn btn-info btn-block" type="submit"><strong>Post Announcment!</strong></button>
-
-    		</form>
+    					<?php endforeach; ?>
+    				</tbody>
+    			</table>
+    		<?php endif; ?>
+    	</div>
 
     	<hr>
+    	<!-- ANNOUNCMENTS POSTING -->
+    	<h3 class="text-center">Post Announcments</h3>
+    	<form action="human_resources.php?status=announcment_posted" method="POST" class="form-group container">
+    		<div class="row">
+    			<div class="col-md-6">
+    				<label><b>Announcment Title</b></label>
+    				<input class="form-control" type="text" placeholder="Free Coffee!" name="announcment_title" required maxlength="20">
+    			</div>
+    			<div class="col-md-6">
+    				<label><b>Announcment Type</b></label>
+    				<input class="form-control" type="text" placeholder="Freebies" name="announcment_type" required maxlength="10">
+    			</div>
+    		</div>
+
+    		<label><b>Announcment Description </b></label>
+    		<textarea class="form-control" type="text" placeholder="Come grab your free coffee on Sunday at the lounge ..." name="announcment_description" required maxlength="120"></textarea>
+    		<br>
+    		<button class="btn btn-primary btn-block" type="submit"><strong>Post Announcment!</strong></button>
+
+    	</form>
+
+    	<hr>
+
     	<!-- ALL REQUESTS CATEGORIZED -->
-    	
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="hr_requests.php">
+                        <div class="card text-center">
+                            <i class="fa fa-calendar fa-2x"></i>
+                            <h4 class="text-center card-text">Requests</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="hr_attendance.php">
+                        <div class="card text-center">
+                            <i class="fa fa-clock-o fa-2x"></i>
+                            <h4 class="text-center card-text">Attendance</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                        <div class="card text-center">
+                            <i class="fa fa-trophy fa-2x"></i>
+                            <h4 class="text-center card-text">Achievements</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>    
+        </div>
+        
+
+
+
 
 
 
