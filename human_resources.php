@@ -168,56 +168,53 @@
 
     	<!-- ALL JOBS VIEW -->
     	<div class="container">
-    		<h3 class="text-center"> All Jobs </h3>
-    		<?php if(isset($jobs)): ?>
-    			<table class="table table-hover">
-    				<thead>
-    					<tr>
-    						<th>Title</th>
-    						<th>Short Description</th>
-    						<th>Number Of Vacancies</th>
-    						<th>Job details & Active applications</th>
-    						<th>Edit Job's Info</th>
-    					</tr>
-    				</thead>
+    		<div class="col-md-8">
+              <h3 class="text-center"> All Jobs </h3>
+                <?php if(isset($jobs)): ?>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Short Description</th>
+                                <th>Number Of Vacancies</th>
+                                <th>Job details & Active applications</th>
+                                <th>Edit Job's Info</th>
+                            </tr>
+                        </thead>
 
-    				<tbody>
-    					<?php foreach ($jobs as $job): ?>
-    						<tr>
-    							<td><?php echo $job['title'] ?></td>
-    							<td><?php echo $job['short_description'] ?></td>
-    							<td><?php echo $job['no_of_vacancies'] ?></td>
-    							<td><a class="btn btn-primary" href="<?php echo "hr_applications.php?job=". $job['title'] ?>"> View details</a></td>
-    							<td><a class ="btn btn-default" href="<?php echo "hr_edit_jobs.php?job=". $job['title'] ?>"> Edit</a></td>
-    						</tr>
-    					<?php endforeach; ?>
-    				</tbody>
-    			</table>
-    		<?php endif; ?>
+                        <tbody>
+                            <?php foreach ($jobs as $job): ?>
+                                <tr>
+                                    <td><?php echo $job['title'] ?></td>
+                                    <td><?php echo $job['short_description'] ?></td>
+                                    <td><?php echo $job['no_of_vacancies'] ?></td>
+                                    <td><a class="btn btn-primary" href="<?php echo "hr_applications.php?job=". $job['title'] ?>"> View details</a></td>
+                                    <td><a class ="btn btn-default" href="<?php echo "hr_edit_jobs.php?job=". $job['title'] ?>"> Edit</a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>      
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-3">
+                  <!-- ANNOUNCMENTS POSTING -->
+                <h3 class="text-center">Post Announcments</h3>
+                <form action="human_resources.php?status=announcment_posted" method="POST" class="form-group">
+
+                    <input class="form-control" type="text" placeholder="Title" name="announcment_title" required maxlength="20">
+                    <br>
+                    <input class="form-control" type="text" placeholder="Type" name="announcment_type" required maxlength="10"> 
+                    <br>
+                    <textarea class="form-control" type="text" placeholder="Description" name="announcment_description" required maxlength="120" rows="6"></textarea>
+                    <br>
+                    <button class="btn btn-primary btn-block" type="submit"><strong>Post Announcment!</strong></button>
+                </form>
+            </div>
     	</div>
-
-    	<hr>
-    	<!-- ANNOUNCMENTS POSTING -->
-    	<h3 class="text-center">Post Announcments</h3>
-    	<form action="human_resources.php?status=announcment_posted" method="POST" class="form-group container">
-    		<div class="row">
-    			<div class="col-md-6">
-    				<label><b>Announcment Title</b></label>
-    				<input class="form-control" type="text" placeholder="Free Coffee!" name="announcment_title" required maxlength="20">
-    			</div>
-    			<div class="col-md-6">
-    				<label><b>Announcment Type</b></label>
-    				<input class="form-control" type="text" placeholder="Freebies" name="announcment_type" required maxlength="10">
-    			</div>
-    		</div>
-
-    		<label><b>Announcment Description </b></label>
-    		<textarea class="form-control" type="text" placeholder="Come grab your free coffee on Sunday at the lounge ..." name="announcment_description" required maxlength="120"></textarea>
-    		<br>
-    		<button class="btn btn-primary btn-block" type="submit"><strong>Post Announcment!</strong></button>
-
-    	</form>
-
+    	
     	<hr>
 
     	<!-- ALL REQUESTS CATEGORIZED -->
