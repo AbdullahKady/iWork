@@ -63,6 +63,7 @@
 	          </tr>
 	      </thead>
 	      <tbody>
+						<?php if(!empty($attendances)): ?>
 	          <?php foreach ($attendances as $attendance): ?>
 	              <tr>
 	                  <td><?php echo $attendance['Day']->format('Y-m-d') ?></td>
@@ -72,6 +73,9 @@
 	                  <td><?php echo $attendance['Missed Hours'] ?></td>
 	              </tr>
 	          <?php endforeach; ?>
+						<?php else : ?>
+							<div class="alert alert-info">Looks like there are no <strong>attendance records</strong> for <b><?php echo $name[0]['Name'] ?></b> in the specified duration.</div>
+						<?php endif; ?>
 	      </tbody>
 	  </table>
 	<?php endif; ?>

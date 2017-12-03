@@ -28,22 +28,8 @@
 
 
 <div class="container">
-	<h3 class="text-center"> Choose the duration for the attendance records </h3>
-	<form action="hr_attendance_records.php" method="POST" class="form-group">
-		<div class="row">
-			<div class="col-md-5">
-				<label for="start_date"><strong>Start Date</strong></label>
-				<input class="form-control" type=date name="start_date" id="start" required>
-			</div>
-			<div class="col-md-1"></div>
-
-			<div class="col-md-5">
-				<label for="end_date"><strong>End Date</strong> (must be later than the start date)</label>
-				<input class="form-control" type=date name="end_date" id="end" required>
-			</div>
-		</div>
-		
-		<br>
+	<h3 class="text-center"> Choose an Employee to check his attendance </h3>
+	<form action="hr_attendance_personalized.php" method="POST" class="form-group">
 		<?php if(isset($staff_members)): ?>
 		    <table class="table table-hover">
 		        <thead>
@@ -73,24 +59,6 @@
 
 	</form>
 </div>
-
-<script>
-	
-	var start = document.getElementById('start');
-	var end = document.getElementById('end');
-	
-	start.addEventListener('change', function() {
-	    if (start.value)
-	        end.min = start.value;
-	}, false);
-
-	end.addEventListener('change', function() {
-	    if (end.value)
-	        start.max = end.value;
-	}, false);
-
-</script>
-
 
 </body>
 </html>
