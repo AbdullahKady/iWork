@@ -169,7 +169,10 @@
     	<!-- ALL JOBS VIEW -->
     	<div class="container">
     		<div class="col-md-8">
-              <h3 class="text-center"> All Jobs </h3>
+              <br/>
+              <button class="btn btn-info btn-block btn-lg" onclick="toggleTable()">Show/Hide <strong>All Jobs</strong></button>
+              <hr>
+                <div id="jobsTable">
                 <?php if(isset($jobs)): ?>
                     <table class="table table-hover">
                         <thead>
@@ -194,7 +197,8 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                <?php endif; ?>      
+                <?php endif; ?>
+                </div>    
             </div>
 
             <div class="col-md-1"></div>
@@ -246,11 +250,17 @@
                 </div>
             </div>    
         </div>
-        
 
-
-
-
+    <script> 
+        function toggleTable() {
+            var jobTbale = document.getElementById("jobsTable");
+            if (jobTbale.style.display === "none") {
+                jobTbale.style.display = "block";
+            } else {
+                jobTbale.style.display = "none";
+            }
+        }
+    </script>
 
 
     	<?php include_once 'includes/scripts.php';?>
