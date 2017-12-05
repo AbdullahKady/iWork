@@ -241,7 +241,7 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="#">
+                    <a href="hr_achievements.php">
                         <div class="card text-center">
                             <i class="fa fa-trophy fa-2x"></i>
                             <h4 class="text-center card-text">Achievements</h3>
