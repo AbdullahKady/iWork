@@ -125,6 +125,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
         <style>
+            textarea {
+                resize: none;
+            }
             .card {
                 color: #3498db;
                 margin-top: 15px;
