@@ -5,7 +5,11 @@
 		$username = $_SESSION['logged_in_user']['username'];
 
   	if(isset($_POST["job_title"])) {
-  		$job_title = $_POST["job_title"];
+      $job_title = $_POST["job_title"];
+  		$role = $_POST["role"];
+
+      $job_title = $role . ' - ' . $job_title;
+
     	$short_description = $_POST["short_description"];
     	$detailed_description = $_POST["detailed_description"];
     	$min_experience = $_POST["min_experience"];
@@ -46,10 +50,22 @@
    		}
 
     	if(sqlsrv_execute($prepared_stmt)) {
-      	while($res = sqlsrv_next_result($prepared_stmt)) {/* pass */};
+      	while($res = sqlsrv_next_result($prepared_stmt)) {};
       
       
       	if ($procedure_params['output'] === 'Success') {
+          //INSERTING QUESTIONS AFTER MAKING SURE THE JOB INSERTION WAS SUCCESSFULL
+          if(isset($_POST['questions'])){
+            $questions = $_POST['questions'];
+            foreach ($questions as $question) {
+              $question_body = $question["'question_body'"];
+              $answer = $question["'answer'"];
+
+              $sql_questions = "EXEC addQuestionsJob '". $username . "','" . $job_title . "','" . $question_body . "',". $answer;
+              $stmt= sqlsrv_query($conn, $sql_questions);
+            }
+
+          }
       	  $flash_message='<div class="alert alert-success alert-dismissable"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><b>Success!</b> The job has been added successfully to the department </div>';
       	} else {
       	  $flash_message='<div class="alert alert-danger alert-dismissable"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><b>Failed!</b> Sorry, the job you are trying to add already exists in the department. </div>';
@@ -57,11 +73,7 @@
     	} else {
      	 die( print_r( sqlsrv_errors(), true));
     	}
-
-
   	}
-
-
 
 ?>
 
@@ -149,8 +161,23 @@
 		<h3 class="text-center">Add a new job</h3>
 		<hr>
 		<form action="hr_add_job.php" method="POST" class="form-group">
-			<label><strong>Job Title</strong></label>
-      <input class="form-control" type="text" placeholder="Enter job title" name="job_title" required maxlength="20">
+      <div class="row">
+        <div class="col-md-3">
+          <label><strong>Role</strong></label>
+          <select name="role" class="form-control">
+            <option>Manager</option>
+            <option>HR</option>
+            <option>Regular Employee</option>
+          </select>
+        </div>
+
+        <div class="col-md-9">
+          <label><strong>Job Title</strong></label>
+          <input class="form-control" type="text" placeholder="Enter job title" name="job_title" required maxlength="20">
+        </div>
+      </div>
+      
+
       <label><strong>Short Description</strong></label>
       <input class="form-control" type="text" placeholder="Enter a short description for the job" name="short_description" required maxlength="120">
       <label><strong>Detailed Description</strong></label>
@@ -165,29 +192,45 @@
       <input class="form-control" type="number" placeholder="Enter the number of avaliable vacancies for the job" name="no_of_vacancies" min="0" required>
 			<label><strong>Number of working hours</strong></label>
       <input class="form-control" type="number" placeholder="Enter the number of working hours for the job" name="working_hours" min="0" required>
+      <br>
       <div class="row">
-        <div class="col-md-9">
-          <h6>Add interview questions (optional)</h6>
-          <textarea class="form-control" name="questions['question']" type="text" placeholder="Insert your question" rows="3" maxlength="20"></textarea>
+        <div class="col-md-9" id="questions-container">
+          <h6>Add interview question(s) (optional)</h6>
         </div>
-        <div class="col-md-3 ">
-          <h6>Model answer</h6>
-          <label class="container-radiobtns">Yes
-            <input type="radio" value="yes" name="questions['answer']">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-radiobtns">No
-            <input type="radio" value="no" name="questions['answer']">
-            <span class="checkmark"></span>
-          </label>
+        <div class="col-md-1"></div>
+        <div class="col-md-2" id="answers-container">
+          <h6>Model answer(s)</h6>
         </div>
       </div>
-
       <br>
-      <button class="btn btn-primary" type="submit">Add job</button>
+      <a href="#" id="add-new-question-btn" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add an extra question</a>
+      <hr>
+      <button class="btn btn-primary">Add job</button>
     	<a href="human_resources.php" class="btn">Cancel</a> 
 		</form>
 
   <?php include_once 'includes/scripts.php';?>
+  <script>
+    let addNewQuestionButton = document.querySelector('#add-new-question-btn');
+    let i = 0;
+    addNewQuestionButton.addEventListener('click', event => {
+      event.preventDefault();
+
+      document.getElementById("questions-container").insertAdjacentHTML('beforeend', `<textarea class="form-control" name="questions[${i}]['question_body']" type="text" placeholder="Insert your question" rows="3" maxlength="20" required></textarea><br>`);
+  
+      document.getElementById("answers-container").insertAdjacentHTML('beforeend', `
+            <label class="container-radiobtns">Yes
+              <input type="radio" value="1" name="questions[${i}]['answer']" checked>
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobtns">No
+              <input type="radio" value="0" name="questions[${i}]['answer']">
+              <span class="checkmark"></span>
+            </label>
+            `);
+      i++;
+    });
+
+  </script>
 </body>
 </html>
