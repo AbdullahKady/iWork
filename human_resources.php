@@ -150,6 +150,15 @@
             body {
                 margin-bottom: 20px;
             }
+            .btn-circle.btn-xl {
+                width: 70px;
+                height: 70px;
+                padding: 10px 16px;
+                font-size: 24px;
+                line-height: 1.33;
+                border-radius: 35px;
+            }
+
         </style>
     </head>
 
@@ -170,6 +179,7 @@
     	<div class="container">
     		<div class="col-md-8">
               <br/>
+              <h3 class="text-center">Department Jobs</h3>
               <button class="btn btn-info btn-block btn-lg" onclick="toggleTable()">Show/Hide <strong>All Jobs</strong></button>
               <hr>
                 <div id="jobsTable">
@@ -198,7 +208,8 @@
                         </tbody>
                     </table>
                 <?php endif; ?>
-                </div>    
+                </div> 
+                <a href="hr_add_job.php" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-plus"></span> <b>Add a new job</b></a>
             </div>
 
             <div class="col-md-1"></div>
