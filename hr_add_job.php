@@ -173,7 +173,7 @@
 
         <div class="col-md-9">
           <label><strong>Job Title</strong></label>
-          <input class="form-control" type="text" placeholder="Enter job title" name="job_title" required maxlength="20">
+          <input class="form-control" type="text" placeholder="Enter job title" name="job_title" required maxlength="50">
         </div>
       </div>
       

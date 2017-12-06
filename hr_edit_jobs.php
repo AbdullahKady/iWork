@@ -46,7 +46,7 @@
 
 	    <div class="form-group">
 	      <label for="title">Job Title</label>
-	      <input type="text" class="form-control" maxlength="20" readonly="readonly" name="title" value="<?php echo $user_data['title'] ?>">
+	      <input type="text" class="form-control" maxlength="50" readonly="readonly" name="title" value="<?php echo $user_data['title'] ?>">
 	    </div>
 
 	    <div class="form-group">
