@@ -78,7 +78,7 @@
 
       <label><b>Password</b></label>
       <input class="form-control" type="password" placeholder="Enter Password" name="password" required maxlength="20">
-
+      <hr>
       <button class="btn btn-primary" type="submit">Login</button>
       <a href="index.php" class="btn">Cancel</a>
     </div>

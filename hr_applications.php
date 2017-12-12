@@ -106,7 +106,7 @@
 		<?php endif; ?>
 
 		<hr>
-		<!-- TODO : cont. applications and shit? -->
+
 		
 		<?php if(!empty($applications)): ?>
 			<h3 class = "text-center"> Pending Applications </h3>

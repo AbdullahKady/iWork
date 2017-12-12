@@ -195,7 +195,7 @@
       <br>
       <div class="row">
         <div class="col-md-9" id="questions-container">
-          <h6>Add interview question(s) (optional)</h6>
+          <h6>Add interview question(s) (optional)</h6><br>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2" id="answers-container">
@@ -216,7 +216,7 @@
     addNewQuestionButton.addEventListener('click', event => {
       event.preventDefault();
 
-      document.getElementById("questions-container").insertAdjacentHTML('beforeend', `<textarea class="form-control" name="questions[${i}]['question_body']" type="text" placeholder="Insert your question" rows="3" maxlength="20" required></textarea><br>`);
+      document.getElementById("questions-container").insertAdjacentHTML('beforeend', `<textarea class="form-control" name="questions[${i}]['question_body']" type="text" placeholder="Insert your question" rows="3" maxlength="20" required></textarea><br><br>`);
   
       document.getElementById("answers-container").insertAdjacentHTML('beforeend', `
             <label class="container-radiobtns">Yes
@@ -226,7 +226,7 @@
             <label class="container-radiobtns">No
               <input type="radio" value="0" name="questions[${i}]['answer']">
               <span class="checkmark"></span>
-            </label>
+            </label><br>
             `);
       i++;
     });

@@ -5,6 +5,16 @@
 	$username = $_SESSION['logged_in_user']['username'];
 	$user_data = array();
   // EXEC the procedure
+  parse_str($_SERVER['QUERY_STRING']);
+  if(isset($status)){
+    $flash_message ='<div class="alert alert-success alert-dismissable "><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><b>Success! </b>Your information has been updated.</div>';   
+  }
+  if(isset($deletedJob)){
+    $sql = "DELETE FROM User_Jobs WHERE username = " . "'". $username . "' AND job="."'"."$deletedJob"."'";
+    $stmt = sqlsrv_query($conn, $sql);
+    $flash_message ='<div class="alert alert-success alert-dismissable "><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><b>Success! </b>The job has been deleted from your previous jobs titles.</div>';   
+  }
+
   $sql = "SELECT * FROM Users WHERE username = " . "'". $username . "'";
 
   $stmt = sqlsrv_query($conn, $sql);
@@ -16,6 +26,17 @@
   while($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     $user_data = $row;
 	}
+
+  $user_jobs = array();
+  $sql_jobs = "SELECT job FROM User_Jobs WHERE username =".  "'". $username . "'";
+  $stmt_jobs = sqlsrv_query($conn, $sql_jobs);
+  if(!$stmt_jobs) {
+    die( print_r( sqlsrv_errors(), true));
+  }
+  while($row_jobs = sqlsrv_fetch_array($stmt_jobs, SQLSRV_FETCH_ASSOC)) {
+    array_push($user_jobs, $row_jobs);
+  }
+
 
 	
 	if(isset($_POST["first_name"])) {
@@ -62,8 +83,16 @@
     }
 
     if(sqlsrv_execute($prepared_stmt)) {
-    
-			$flash_message ='<div class="alert alert-success alert-dismissable "><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Your information has been updated.</div>';      
+      if(isset($_POST['previous_jobs'])){
+        $previous_jobs = $_POST['previous_jobs'];
+        foreach ($previous_jobs as $previous_job) {
+          $sql_previous = "EXEC addPreviousJob '". $username . "','" . $previous_job . "'";
+          $stmt_previous= sqlsrv_query($conn, $sql_previous);
+        }
+      }
+      header("Location: settings.php?status=updated");
+      die();
+			   
     } else {
       die( print_r( sqlsrv_errors(), true));
     }
@@ -143,15 +172,39 @@
 	      <label for="new_password">New Password (re-enter the old password if you don't want to change it)</label>
 	      <input type="password" class="form-control" maxlength="20" name="new_password" placeholder="•••••••" required>
 	    </div>
+      <h6 class="text-center"> <b>Previous job titles</b> (deleting will refresh this page, thus losing any edited info)</h6>
 
+      <?php foreach ($user_jobs as $previous_job): ?>
+        <li>
+          <?php echo $previous_job['job'] ?>
+          <a href="settings.php?deletedJob=<?php echo $previous_job['job'] ?>" > delete this job</a>
+        </li>
+      <?php endforeach; ?><br>
+      <div id="previous-container">
+        <h6>Add new previous job titles</h6><br>
+      </div>
+      <a href="#" id="add-prev-job-btn" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add an extra job</a>
+      <hr>
 	    <button type="submit" class="btn btn-primary">Save</button>
 	    <a href="index.php" class="btn">Cancel</a>
+      
 
 	  </form>
-
+    <br>
 	</div>
 
 	<?php include_once 'includes/scripts.php';?>
+    <script>
+    let addPreviousJobButton = document.querySelector('#add-prev-job-btn');
+    let i = 0;
+    addPreviousJobButton.addEventListener('click', event => {
+      event.preventDefault();
+
+      document.getElementById("previous-container").insertAdjacentHTML('beforeend', `<textarea class="form-control" name="previous_jobs[${i}]" type="text" placeholder="Insert your previous job title" rows="3" maxlength="50" required></textarea><br>`);
+  
+      i++;
+    });
+  </script>
 
 </body>
 </html>

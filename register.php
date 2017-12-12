@@ -51,6 +51,15 @@
       
       if ($procedure_params['output'] === 'Registeration successful') {
         // Execution completed, login the user
+        if(isset($_POST['previous_jobs'])){
+          $previous_jobs = $_POST['previous_jobs'];
+          foreach ($previous_jobs as $previous_job) {
+            $sql_previous = "EXEC addPreviousJob '". $username . "','" . $previous_job . "'";
+            $stmt_previous= sqlsrv_query($conn, $sql_previous);
+          }
+        }
+
+
         $_SESSION['logged_in_user']['username'] = $username;
         $_SESSION['logged_in_user']['role'] = 'Seeker';
 
@@ -115,9 +124,15 @@
 
       <label><strong>Last Name</strong></label>
       <input class="form-control" type="text" placeholder="smith" name="last_name" maxlength="20">
+      <br>
+      <div id="previous-container">
+        <h6>Your previous jobs (optional)</h6><br>
+      </div>
+      <a href="#" id="add-prev-job-btn" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add an extra job</a>
+      <hr>
 
     </div>
-
+    <br>
     <button class="btn btn-primary" type="submit">Register</button>
     <a href="index.php" class="btn">Cancel</a> 
 
@@ -125,6 +140,16 @@
   </form>
 
   <?php include_once 'includes/scripts.php';?>
+  <script>
+    let addPreviousJobButton = document.querySelector('#add-prev-job-btn');
+    let i = 0;
+    addPreviousJobButton.addEventListener('click', event => {
+      event.preventDefault();
 
+      document.getElementById("previous-container").insertAdjacentHTML('beforeend', `<textarea class="form-control" name="previous_jobs[${i}]" type="text" placeholder="Insert your previous job title" rows="3" maxlength="50" required></textarea><br>`);
+  
+      i++;
+    });
+  </script>
 </body>
 </html>
