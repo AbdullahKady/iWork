@@ -242,7 +242,7 @@
                     <a href="hr_requests.php">
                         <div class="card text-center">
                             <i class="fa fa-calendar fa-2x"></i>
-                            <h4 class="text-center card-text">Requests</h3>
+                            <h4 class="text-center card-text">Requests</h4>
                         </div>
                     </a>
                 </div>
@@ -250,7 +250,7 @@
                     <a href="hr_attendance.php">
                         <div class="card text-center">
                             <i class="fa fa-clock-o fa-2x"></i>
-                            <h4 class="text-center card-text">Attendance</h3>
+                            <h4 class="text-center card-text">Attendance</h4>
                         </div>
                     </a>
                 </div>
@@ -258,7 +258,7 @@
                     <a href="hr_achievements.php">
                         <div class="card text-center">
                             <i class="fa fa-trophy fa-2x"></i>
-                            <h4 class="text-center card-text">Achievements</h3>
+                            <h4 class="text-center card-text">Achievements</h4>
                         </div>
                     </a>
                 </div>

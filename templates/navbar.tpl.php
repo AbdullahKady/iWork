@@ -3,19 +3,19 @@ $dashboard_path = '';
 if(isset($_SESSION["logged_in_user"])) {
   switch ($_SESSION["logged_in_user"]['role']) {
     case "Manager":
-      $dashboard_path = 'manager.php';
+      $dashboard_path = 'staff_dashboard.php';
       break;
     case "Seeker":
       $dashboard_path = 'seeker.php';
       break;
     case "HR":
-      $dashboard_path = 'human_resources.php';
+      $dashboard_path = 'staff_dashboard.php';
       break;
     case "Regular":
-      $dashboard_path = 'regular.php';
+      $dashboard_path = 'staff_dashboard.php';
       break;
     default:
-      $dashboard_path = '';
+      $dashboard_path = 'index.php';
   }
 } 
 ?>
