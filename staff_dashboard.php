@@ -2,6 +2,7 @@
 <?php
   session_start();
   include_once 'includes/db_connect.php';
+  $username = $_SESSION['logged_in_user']['username'];
   if(isset($_SESSION["logged_in_user"])) {
  		switch ($_SESSION["logged_in_user"]['role']) {
   		case "Manager":
@@ -16,7 +17,37 @@
   		default:
   		  $personalized_path = 'index.php';
   	}
-	} 
+
+	}
+
+    $procedure_params['username'] = $username;
+    $procedure_params['company'] = '';
+    $procedure_params['department_name'] = '';
+    $procedure_params['job_string'] = '';
+    $procedure_params['department_code'] = '';
+
+    $procedure_passed_params = array(
+      array(&$procedure_params['username'], SQLSRV_PARAM_IN),
+      array(&$procedure_params['company'], SQLSRV_PARAM_OUT),
+      array(&$procedure_params['department_name'], SQLSRV_PARAM_OUT),
+      array(&$procedure_params['job_string'], SQLSRV_PARAM_OUT),
+      array(&$procedure_params['department_code'], SQLSRV_PARAM_OUT),
+    );
+
+    // EXEC the procedure
+    $sql = "EXEC currentStatusStaff @username = ?, @company = ?, @department_name = ?, @job_string = ?, @department_code = ?";
+    $prepared_stmt = sqlsrv_prepare($conn, $sql, $procedure_passed_params);
+
+    if(!$prepared_stmt) {
+      die( print_r( sqlsrv_errors(), true));
+    }
+    sqlsrv_execute($prepared_stmt);
+    $company = $procedure_params['company'];
+    $department_name = $procedure_params['department_name'];
+    $job_string = $procedure_params['job_string'];
+    $department_code = $procedure_params['department_code'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -82,8 +113,16 @@
                     </div>
                 </a>
             </div>
-        </div>    
+        </div>
+        <hr>
+        <h3>Current status :</h3>
+        <ul class="list-group">
+          <li class="list-group-item">Current Job : <?php echo $job_string ?> </li>
+          <li class="list-group-item">Current Company : <?php echo $company ?> </li>
+          <li class="list-group-item">Current Department : <?php echo $department_name . ' ('.$department_code.')' ?>  </li>
+        </ul>
     </div>
+
 
 	<?php include_once 'includes/scripts.php';?>
 </body>
