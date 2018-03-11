@@ -1,24 +1,17 @@
 <?php
-    session_start();
-
-    include_once 'includes/db_connect.php';
-?>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <?php include_once 'includes/header.php' ?> 
-</head>
-
-<body>
-  <?php include_once 'templates/navbar.tpl.php';?>
-
-  <div class="container">
-    <h1 class="text-center">I Am A Manager !</h1>
+include_once 'manager_dash_temp.php';
+parse_str($_SERVER['QUERY_STRING']);
+ ?>
+Dashboard</h3>
+</div>
+<div class="panel-body">
+  <p> Welcome Mr/Mrs &nbsp; <?php echo $_SESSION['logged_in_user']['username']; ?></p>
+    </div>
+    </div>
   </div>
+  </div>
+  </div>
+  </section>
 
-  <?php include_once 'includes/scripts.php';?>
-
-</body>
-</html>
+  </body>
+  </html>

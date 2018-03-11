@@ -109,7 +109,7 @@
                 <a href="<?php echo $personalized_path ?>">
                     <div class="card text-center">
                         <i class="fa fa-user fa-2x"></i>
-                        <h3 class="text-center card-text">Personalzied dashboard</h3>
+                        <h3 class="text-center card-text">Personalized dashboard</h3>
                     </div>
                 </a>
             </div>

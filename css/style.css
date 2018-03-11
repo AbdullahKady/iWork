@@ -1,0 +1,23 @@
+#header{
+  background:#444444;
+  color: #16a085;
+  padding-bottom: 10px !important;
+  margin-bottom: 15px !important;
+  max-height: 50px;
+}
+
+#header .create{
+  padding-top: 0px;
+}
+h5{
+  margin-top: 10px;
+}
+.btn{
+  min-width: 200px;
+}
+.main-color-bg{
+  background-color:  #444444 !important;
+    border-color: #16a085 !important;
+
+  color:#ffffff!important;
+}
