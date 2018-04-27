@@ -10,5 +10,3 @@ The project was divided into 4 different components/views:
 2) Job Seekers/Regular Employees.
 3) Managers.
 4) HR Employees.
-
-I implemented the database, along with the corresponding procedures/insertions, and developed the website for the 1<sup>st</sup>&4<sup>th</sup> part.
